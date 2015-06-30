@@ -12,13 +12,13 @@ http://mailru.github.io/FileAPI/
 本项目会定期更新引用的Jcrop和FileAPI版本。并且引用为完整引用，不会对引用的第三方组件进行代码修改再分发。关于引用组件的更新变化请关注它们的主页。
 ##如何使用
 ###引用FileAPI和Jcrop
-```Javascript
+```Html
 <script type="text/javascript" src="../dependent/fileapi/FileAPI.min.js"></script>
 <script type="text/javascript" src="../dependent/jcrop/jquery.Jcrop.min.js"></script>
 <link rel="stylesheet" href="../dependent/jcrop/jquery.Jcrop.min.css" />
 ```
 ###引用ImageCropUpload
-```Javascript
+```Html
 <script type="text/javascript" src="../dist/Jquery.ImageCropUpload.min.js"></script>
 ```
 ###使用例子
