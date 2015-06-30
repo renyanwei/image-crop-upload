@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.8.2/jquery.js"></script>
+
+  <script type="text/javascript" src="../dependent/fileapi/FileAPI.min.js"></script>	
+  <script type="text/javascript" src="../dependent/jcrop/jquery.Jcrop.min.js"></script>
+  <link rel="stylesheet" href="../dependent/jcrop/jquery.Jcrop.min.css" />
+
+  <script type="text/javascript" src="../dist/Jquery.ImageCropUpload.js"></script>
+  <title>演示</title>
+ </head>
+ <body>
+  <div id="fileapi" style="background-color:red;height:100px">上传</div>
+  <input type="file" id="filectl">
+
+  <div id="images"></div>
+  <script type="text/javascript">
+	$("#fileapi").ImageCropUpload({
+		imagewidth:300,
+		imageheight:300,
+		cropcomplete:function(img,opt){
+			$("#images").append(img);
+		}
+	});
+  </script>
+ </body>
+</html>
