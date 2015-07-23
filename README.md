@@ -22,7 +22,12 @@ http://mailru.github.io/FileAPI/
 <script type="text/javascript" src="../dist/Jquery.ImageCropUpload.min.js"></script>
 ```
 ###使用例子
-```Javascript
+```Html
+<!--使用1：file控件-->
+<input type="file" id="fileapi" name="fileapi"/>
+<!--使用2：普通标签-->
+<div id="fileapi"/>
+<script>
 $("#fileapi").ImageCropUpload({
 	imagewidth:300,
 	imageheight:300,
@@ -30,6 +35,7 @@ $("#fileapi").ImageCropUpload({
 		$("#images").append(img);
 	}
 });
+</script>
 ```
 #全部配置说明
 |参数        |类型|说明|
