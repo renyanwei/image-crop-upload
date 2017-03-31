@@ -5,7 +5,7 @@
 ### Jcrop
 Jcrop (official) - Image Cropping Plugin for jQuery 
 http://deepliquid.com/content/Jcrop.html
-###FileAPI
+### FileAPI
 FileAPI — a set of javascript tools for working with files. Multiupload, drag'n'drop and chunked file upload. Images: crop, resize and auto orientation by EXIF. 
 http://mailru.github.io/FileAPI/
 ### 特别说明
