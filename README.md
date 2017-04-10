@@ -41,8 +41,8 @@ $("#fileapi").ImageCropUpload({
 |参数        |类型|说明|
 |-------- | :----: | --------  |
 |uploadurl        |String|上传服务器URL地址|
-|imagewidth        |String|图片合适宽度，过大将会启用裁剪|
-|imageheight        |String|图片合适高度，过大将会启用裁剪|
+|imagewidth        |String|图片合适宽度，过大将会启用裁剪，优先级小于目标节点的data-width|
+|imageheight        |String|图片合适高度，过大将会启用裁剪，优先级小于目标节点的data-height|
 |customver        |All|自定义参数，可以是任何值。回调函数处理 | 
 |cropcomplete        |Function(image,option) |裁剪完成执行的回调函数|
 |uploadbefore        |Function(option)  |开始上传之前执行的回调函数|
