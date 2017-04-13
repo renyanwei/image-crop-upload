@@ -181,6 +181,10 @@
     };
 
     $.fn.ImageCropUpload = function (opt) {
+		FileAPI = {
+			flashUrl: '../dependent/FileAPI/FileAPI.flash.swf',
+			flashImageUrl: '../dependent/FileAPI/FileAPI.flash.image.swf'
+		};
         this.each(function () {
             opt.imageheight = $(this).data("height")||opt.imagewidth;
             opt.imagewidth = $(this).data("width")||opt.imageheight;
