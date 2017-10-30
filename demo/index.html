@@ -17,9 +17,10 @@
  </head>
  <body>
   <div id="fileapi" style="background-color:#ccc;height:100px;border-radius:5px;text-align:center;line-height:100px;width:50%">上传。裁剪300*300</div>
-
+<input type="file" id="test" />
   <div id="images"></div>
   <script type="text/javascript">
+	FileAPI.event.on(document.getElementById("test"), 'change', function (evt){});
 	$("#fileapi").ImageCropUpload({
 		imagewidth:300,
 		imageheight:300,
