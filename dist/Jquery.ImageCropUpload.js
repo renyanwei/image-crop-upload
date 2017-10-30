@@ -24,7 +24,7 @@
 
         function init() {
             setinp();
-            FileAPI.event.on(document.getElementById("aaa"), 'change', function (evt) {
+            FileAPI.event.on(inp, 'change', function (evt) {
                 var files = FileAPI.getFiles(evt);
                 FileAPI.filterFiles(files, function (file, info) {
 					fileapi_imageobject_width=info.width;

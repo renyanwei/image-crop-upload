@@ -7,7 +7,7 @@
   <meta name="Keywords" content="">
   <meta name="Description" content="">
   <script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.8.2/jquery.js"></script>
-  <script>window.FileAPI = { staticPath: '/image-crop-upload/demo/dist/' };</script>
+
   <script type="text/javascript" src="../dependent/FileAPI/FileAPI.min.js"></script>	
   <script type="text/javascript" src="../dependent/Jcrop/jquery.Jcrop.min.js"></script>
   <link rel="stylesheet" href="../dependent/Jcrop/jquery.Jcrop.min.css" />
@@ -26,31 +26,6 @@
 			$("#images").append(img);
 		}
 	});
-  </script>
-<div class="js-fileapi-wrapper upload-btn">
-      <div class="upload-btn__txt">Choose files</div>
-      <input id="choose" name="files" type="file" multiple />
-    </div>
-  <script type="text/javascript">
-    FileAPI.event.on(document.getElementById("choose"), 'change', function (evt){
-      var files = FileAPI.getFiles(evt); // Retrieve file list
-
-      FileAPI.filterFiles(files, function (file, info/**Object*/){
-        if( /^image/.test(file.type) ){
-          return  info.width >= 320 && info.height >= 240;
-        }
-        return  false;
-      }, function (files/**Array*/, rejected/**Array*/){
-        if( files.length ){
-          // Make preview 100x100
-          FileAPI.each(files, function (file){
-            FileAPI.Image(file).preview(100).get(function (err, img){
-              images.appendChild(img);
-            });
-          });
-        }
-      });
-    });
   </script>
  </body>
 </html>
