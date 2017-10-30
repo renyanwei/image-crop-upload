@@ -20,7 +20,10 @@
 <input type="file" id="test" />
   <div id="images"></div>
   <script type="text/javascript">
-	FileAPI.event.on(document.getElementById("test"), 'change', function (evt){});
+	FileAPI.event.on(document.getElementById("test"), 'change', function (evt){
+		var files = FileAPI.getFiles(evt);
+		console.log(files);
+	});
 	$("#fileapi").ImageCropUpload({
 		imagewidth:300,
 		imageheight:300,
