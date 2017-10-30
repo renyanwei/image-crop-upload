@@ -27,9 +27,12 @@
 		}
 	});
   </script>
-  <input type="file" id="aaa" />
+<div class="js-fileapi-wrapper upload-btn">
+      <div class="upload-btn__txt">Choose files</div>
+      <input id="choose" name="files" type="file" multiple />
+    </div>
   <script type="text/javascript">
-    FileAPI.event.on(document.getElementById("aaa"), 'change', function (evt){
+    FileAPI.event.on(document.getElementById("choose"), 'change', function (evt){
       var files = FileAPI.getFiles(evt); // Retrieve file list
 
       FileAPI.filterFiles(files, function (file, info/**Object*/){
