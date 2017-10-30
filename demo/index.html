@@ -39,7 +39,7 @@
 
   <script>window.FileAPI = { staticPath: '/image-crop-upload/demo/dist/' };</script>
   <script>
-    FileAPI.event.on(choose, 'change', function (evt){
+    FileAPI.event.on(document.getElementById("choose"), 'change', function (evt){
       var files = FileAPI.getFiles(evt); // Retrieve file list
 
       FileAPI.filterFiles(files, function (file, info/**Object*/){
