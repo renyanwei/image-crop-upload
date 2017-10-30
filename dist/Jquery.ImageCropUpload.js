@@ -16,7 +16,7 @@
                 inp = document.createElement("input");
                 inp.type = "file";
                 inp.style.cssText = "position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);";
-                $(obj).css({ "position": "relative", "overflow": "hidden" }).append($(inp).css({ "position": "absolute", "font-size": "100px", "right": 0, "top": 0, "left": 0, "bottom": 0, "opacity": 0, "filter": "alpha(opacity=0)" }));
+                $(obj).addClass("js-fileapi-wrapper").css({ "position": "relative", "overflow": "hidden" }).append($(inp).css({ "position": "absolute", "font-size": "100px", "right": 0, "top": 0, "left": 0, "bottom": 0, "opacity": 0, "filter": "alpha(opacity=0)" }));
             }
         }
 
