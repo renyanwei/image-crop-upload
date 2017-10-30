@@ -16,47 +16,17 @@
   <title>演示</title>
  </head>
  <body>
- 
-
-   <div>
-    <!-- "js-fileapi-wrapper" -- required class -->
-    <div class="js-fileapi-wrapper upload-btn">
-      <div class="upload-btn__txt">Choose files</div>
-      <input id="choose" name="files" type="file" multiple />
-    </div>
-    <div id="images"><!-- previews --></div>
-  </div>
-
-  <script>window.FileAPI = { staticPath: '/image-crop-upload/demo/dist/' };</script>
-   <script type="text/javascript" src="../dependent/FileAPI/FileAPI.min.js"></script>	
-  <script>
-    FileAPI.event.on(document.getElementById("choose"), 'change', function (evt){
-      var files = FileAPI.getFiles(evt); // Retrieve file list
-
-      FileAPI.filterFiles(files, function (file, info/**Object*/){
-        if( /^image/.test(file.type) ){
-          return  info.width >= 320 && info.height >= 240;
-        }
-        return  false;
-      }, function (files/**Array*/, rejected/**Array*/){
-        if( files.length ){
-          // Make preview 100x100
-          FileAPI.each(files, function (file){
-            FileAPI.Image(file).preview(100).get(function (err, img){
-              images.appendChild(img);
-            });
-          });
-
-          // Uploading Files
-          FileAPI.upload({
-            url: './ctrl.php',
-            files: { images: files },
-            progress: function (evt){ /* ... */ },
-            complete: function (err, xhr){ /* ... */ }
-          });
-        }
-      });
-    });
+  <div id="fileapi" style="background-color:#ccc;height:100px;border-radius:5px;text-align:center;line-height:100px;width:50%">上传。裁剪300*300</div>
+  <div id="images"></div>
+  <script type="text/javascript">
+	$("#fileapi").ImageCropUpload({
+		imagewidth:300,
+		imageheight:300,
+		cropcomplete:function(img,opt){
+			$("#images").append(img);
+		}
+	});
   </script>
+  <input type="file" id="aaa" />
  </body>
 </html>
