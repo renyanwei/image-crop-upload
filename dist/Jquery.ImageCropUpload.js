@@ -59,8 +59,8 @@
         }
 
         function upload(__file) {
-            if (opt.uploadCheck){
-                if (!opt.uploadCheck(options)) {
+            if (opt.uploadcheck){
+                if (!opt.uploadcheck(options)) {
                     return;
                 }
             }
