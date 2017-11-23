@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.ImageCropUpload = function (obj, opt) {
         var fileapi_imageobject_width = 0;
         var fileapi_imageobject = null;
@@ -27,12 +27,14 @@
             FileAPI.event.on(inp, 'change', function (evt) {
                 var files = FileAPI.getFiles(evt);
                 FileAPI.filterFiles(files, function (file, info) {
-					fileapi_imageobject_width=info.width;
+                    fileapi_imageobject_width = info.width;
                     return /^image/.test(file.type);
                 }, function (files, rejected) {
                     if (files.length) {
                         FileAPI.each(files, function (file) {
-                            if (options.imagewidth && options.imagewidth) {
+                            if (!options.imagewidth || !options.imagewidth || !options.cropenable) {
+                                upload(file);
+                            } else {
                                 fileapi_imageobject = FileAPI.Image(file).resize(1032, 480, "max").get(function (e1, i1) {
                                     crop(options.imagewidth, options.imageheight, i1, function (_imgwidth, size) {
                                         fileapi_imageobject = FileAPI.Image(fileapi_imageobject).crop(size.x * (fileapi_imageobject_width / _imgwidth), size.y * (fileapi_imageobject_width / _imgwidth), size.w * (fileapi_imageobject_width / _imgwidth), size.h * (fileapi_imageobject_width / _imgwidth)).resize(options.imagewidth, options.imageheight);
@@ -49,9 +51,7 @@
 
                                     });
                                 });
-                            } else if(options.uploadurl){
-								upload(file);
-							}
+                            }
                         });
                     }
                 });
@@ -59,15 +59,18 @@
         }
 
         function upload(__file) {
+            if (opt.uploadCheck){
+                if (!opt.uploadCheck(options)) {
+                    return;
+                }
+            }
             var xhr = FileAPI.upload({
                 url: options.uploadurl,
                 files: {
                     file: __file
                 },
                 upload: function (xhr/**Object*/, fileopt/**Object*/) {
-					if(options.uploadbefore){
-						options.uploadbefore(options);	
-					}
+                    //options.uploadbefore(options);
                 },
                 fileupload: function (file/**Object*/, xhr/**Object*/, fileopt/**Object*/) {
                     if (options.uploadstart)
@@ -119,6 +122,7 @@
                     $("#imgcropmark").hide();
 					callback($("#cropbtnok").data("imagewidth"), $("#cropbtnok").data("size"));
                     $("#imgcropdialog").remove();
+                    //crop.destroy();
                 });
                 $("#imgcropclose").click(function () {
                     $("#imgcropmark").hide();
@@ -170,6 +174,7 @@
         init();
     };
     $.ImageCropUpload.defaults = {
+        cropenable: true,
         uploadurl: undefined,
         imagewidth: undefined,
         imageheight: undefined,
@@ -182,8 +187,8 @@
 
     $.fn.ImageCropUpload = function (opt) {
         this.each(function () {
-            opt.imageheight = $(this).data("height")||opt.imagewidth;
-            opt.imagewidth = $(this).data("width")||opt.imageheight;
+            opt.imageheight = $(this).data("height");
+            opt.imagewidth = $(this).data("width");
            $.ImageCropUpload(this, opt);
         });
     }
