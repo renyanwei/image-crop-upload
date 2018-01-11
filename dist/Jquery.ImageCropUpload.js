@@ -17,6 +17,7 @@
                 inp.type = "file";
                 inp.style = "position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);";
                 $(obj).css({ "position": "relative", "overflow": "hidden" }).append($(inp).css({ "position": "absolute", "font-size": "100px", "right": 0, "top": 0, "left": 0, "bottom": 0, "opacity": 0, "filter": "alpha(opacity=0)" }));
+                $(inp).addClass("cropuploaderdom");
             }
         }
 
@@ -59,7 +60,7 @@
         }
 
         function upload(__file) {
-            if (opt.uploadcheck){
+            if (opt.uploadcheck) {
                 if (!opt.uploadcheck(options)) {
                     return;
                 }
@@ -120,7 +121,7 @@
                 $("body").append(cropdiv);
                 $("#cropbtnok").click(function () {
                     $("#imgcropmark").hide();
-					callback($("#cropbtnok").data("imagewidth"), $("#cropbtnok").data("size"));
+                    callback($("#cropbtnok").data("imagewidth"), $("#cropbtnok").data("size"));
                     $("#imgcropdialog").remove();
                     //crop.destroy();
                 });
@@ -187,9 +188,11 @@
 
     $.fn.ImageCropUpload = function (opt) {
         this.each(function () {
-            opt.imageheight = $(this).data("height");
-            opt.imagewidth = $(this).data("width");
-           $.ImageCropUpload(this, opt);
+            if (!$(this).hasClass("cropuploaderdom")) {
+                opt.imageheight = $(this).data("height");
+                opt.imagewidth = $(this).data("width");
+                $.ImageCropUpload(this, opt);
+            }
         });
     }
 }(jQuery));
