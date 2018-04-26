@@ -189,8 +189,8 @@
     $.fn.ImageCropUpload = function (opt) {
         this.each(function () {
             if (!$(this).hasClass("cropuploaderdom")) {
-                opt.imageheight = $(this).data("height");
-                opt.imagewidth = $(this).data("width");
+                opt.imageheight = $(this).data("height")||opt.imageheight;
+                opt.imagewidth = $(this).data("width")||opt.imagewidth;
                 $.ImageCropUpload(this, opt);
             }
         });
