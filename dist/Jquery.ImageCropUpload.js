@@ -15,9 +15,8 @@
             } else {
                 inp = document.createElement("input");
                 inp.type = "file";
-                inp.style = "position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);";
-                $(obj).css({ "position": "relative", "overflow": "hidden" }).append($(inp).css({ "position": "absolute", "font-size": "100px", "right": 0, "top": 0, "left": 0, "bottom": 0, "opacity": 0, "filter": "alpha(opacity=0)" }));
-                $(inp).addClass("cropuploaderdom");
+                inp.style.cssText = "position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);";
+                $(obj).addClass("js-fileapi-wrapper").css({ "position": "relative", "overflow": "hidden" }).append($(inp).css({ "position": "absolute", "font-size": "100px", "right": 0, "top": 0, "left": 0, "bottom": 0, "opacity": 0, "filter": "alpha(opacity=0)" }));
             }
         }
 
@@ -28,14 +27,12 @@
             FileAPI.event.on(inp, 'change', function (evt) {
                 var files = FileAPI.getFiles(evt);
                 FileAPI.filterFiles(files, function (file, info) {
-                    fileapi_imageobject_width = info.width;
+					fileapi_imageobject_width=info.width;
                     return /^image/.test(file.type);
                 }, function (files, rejected) {
                     if (files.length) {
                         FileAPI.each(files, function (file) {
-                            if (!options.imagewidth || !options.imagewidth || !options.cropenable) {
-                                upload(file);
-                            } else {
+                            if (options.imagewidth && options.imagewidth) {
                                 fileapi_imageobject = FileAPI.Image(file).resize(1032, 480, "max").get(function (e1, i1) {
                                     crop(options.imagewidth, options.imageheight, i1, function (_imgwidth, size) {
                                         fileapi_imageobject = FileAPI.Image(fileapi_imageobject).crop(size.x * (fileapi_imageobject_width / _imgwidth), size.y * (fileapi_imageobject_width / _imgwidth), size.w * (fileapi_imageobject_width / _imgwidth), size.h * (fileapi_imageobject_width / _imgwidth)).resize(options.imagewidth, options.imageheight);
@@ -52,7 +49,9 @@
 
                                     });
                                 });
-                            }
+                            } else if(options.uploadurl){
+								upload(file);
+							}
                         });
                     }
                 });
@@ -60,18 +59,15 @@
         }
 
         function upload(__file) {
-            if (opt.uploadcheck) {
-                if (!opt.uploadcheck(options)) {
-                    return;
-                }
-            }
             var xhr = FileAPI.upload({
                 url: options.uploadurl,
                 files: {
                     file: __file
                 },
                 upload: function (xhr/**Object*/, fileopt/**Object*/) {
-                    //options.uploadbefore(options);
+					if(options.uploadbefore){
+						options.uploadbefore(options);	
+					}
                 },
                 fileupload: function (file/**Object*/, xhr/**Object*/, fileopt/**Object*/) {
                     if (options.uploadstart)
@@ -121,9 +117,8 @@
                 $("body").append(cropdiv);
                 $("#cropbtnok").click(function () {
                     $("#imgcropmark").hide();
-                    callback($("#cropbtnok").data("imagewidth"), $("#cropbtnok").data("size"));
+					callback($("#cropbtnok").data("imagewidth"), $("#cropbtnok").data("size"));
                     $("#imgcropdialog").remove();
-                    //crop.destroy();
                 });
                 $("#imgcropclose").click(function () {
                     $("#imgcropmark").hide();
@@ -175,7 +170,6 @@
         init();
     };
     $.ImageCropUpload.defaults = {
-        cropenable: true,
         uploadurl: undefined,
         imagewidth: undefined,
         imageheight: undefined,
@@ -188,11 +182,9 @@
 
     $.fn.ImageCropUpload = function (opt) {
         this.each(function () {
-            if (!$(this).hasClass("cropuploaderdom")) {
-                opt.imageheight = $(this).data("height")||opt.imageheight;
-                opt.imagewidth = $(this).data("width")||opt.imagewidth;
-                $.ImageCropUpload(this, opt);
-            }
+            opt.imageheight = $(this).data("height")||opt.imagewidth;
+            opt.imagewidth = $(this).data("width")||opt.imageheight;
+           $.ImageCropUpload(this, opt);
         });
     }
 }(jQuery));
