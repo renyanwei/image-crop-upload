@@ -32,7 +32,7 @@
                 }, function (files, rejected) {
                     if (files.length) {
                         FileAPI.each(files, function (file) {
-                            if (options.imagewidth && options.imagewidth) {
+                            if (options.cropenable && options.imagewidth && options.imageheight) {
                                 fileapi_imageobject = FileAPI.Image(file).resize(1032, 480, "max").get(function (e1, i1) {
                                     crop(options.imagewidth, options.imageheight, i1, function (_imgwidth, size) {
                                         fileapi_imageobject = FileAPI.Image(fileapi_imageobject).crop(size.x * (fileapi_imageobject_width / _imgwidth), size.y * (fileapi_imageobject_width / _imgwidth), size.w * (fileapi_imageobject_width / _imgwidth), size.h * (fileapi_imageobject_width / _imgwidth)).resize(options.imagewidth, options.imageheight);
@@ -171,6 +171,7 @@
     };
     $.ImageCropUpload.defaults = {
         uploadurl: undefined,
+        cropenable: false,
         imagewidth: undefined,
         imageheight: undefined,
         customver: undefined,
